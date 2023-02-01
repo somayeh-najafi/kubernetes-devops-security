@@ -25,7 +25,7 @@ pipeline {
 
         stage('Kubernetes deeployment-Dev Env') {
             steps {
-              withKubeConfig(credentialsId: 'kubeconfig', url: '') {
+              withKubeConfig(credentialsId: 'kubeconfig') {
               sh "sed -i 's,replace,smyhus/numeric_app:${GIT_COMMIT},g' k8s_deployment_service.yaml"
               sh 'kubectl apply -f k8s_deployment_service.yaml'
             }
