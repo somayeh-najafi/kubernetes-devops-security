@@ -1,0 +1,3 @@
+fileignoreconfig:
+- filename: files/password.txt
+  checksum: f59fe9e84b590c09c3974399b837f372e0e6e8ed260b73a0c8c35b28b68a5ca7
