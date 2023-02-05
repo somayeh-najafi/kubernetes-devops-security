@@ -13,14 +13,14 @@ pipeline {
               sh "mvn test"
             }
         } 
-        stage('build and push docker image') {
-            steps {
-              withDockerRegistry(credentialsId: 'dockerhub', url: '') {
-              sh "printenv"
-              sh 'docker build -t smyhus/numeric_app:""$GIT_COMMIT"" .'
-              sh 'docker push smyhus/numeric_app:""$GIT_COMMIT"" '
-            }
-            }
+
+        stage('Mutation Tests - PIT') {
+      steps {
+        sh "mvn org.pitest:pitest-maven:mutationCoverage"}
+      post {
+        always {
+          pitmutation mutationStatsFile:'**/target/pit-reports/**/mutations.xml'}
+          }
         } 
 
         stage ('SonarQube - SAST') {
@@ -36,6 +36,18 @@ pipeline {
                 }
           }
         }
+
+        stage('build and push docker image') {
+            steps {
+              withDockerRegistry(credentialsId: 'dockerhub', url: '') {
+              sh "printenv"
+              sh 'docker build -t smyhus/numeric_app:""$GIT_COMMIT"" .'
+              sh 'docker push smyhus/numeric_app:""$GIT_COMMIT"" '
+            }
+            }
+        } 
+
+        
 
         stage('Kubernetes deployment-Dev Env') {
             steps {
