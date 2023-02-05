@@ -23,6 +23,16 @@ pipeline {
             }
         } 
 
+        stage ('SonarQube -SAST') {
+
+          steps {
+             sh 'mvn clean verify sonar:sonar \
+                  -Dsonar.projectKey=numeric_app \
+                  -Dsonar.host.url=http://35.188.59.120:9000 \
+                  -Dsonar.login=sqp_a24a94383c605aac53940634ae533511940f8fd0'
+          }
+        }
+
         stage('Kubernetes deeployment-Dev Env') {
             steps {
               withKubeConfig(credentialsId: 'kubeconfig') {
