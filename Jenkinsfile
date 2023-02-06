@@ -32,7 +32,7 @@ pipeline {
           
           steps {
             withSonarQubeEnv('SonarQube') {
-             sh 'mvn sonar:sonar -Dsonar.projectKey=numeric -Dsonar.host.url=http://35.188.59.120:9000 -Dsonar.login=a96546641377275ff4111a4895422ad6356656d8'
+             sh 'mvn sonar:sonar -Dsonar.projectKey=numeric -Dsonar.host.url=http://35.188.59.120:9000'
             }
             timeout(time: 2, unit: 'MINUTES') {
                     script {
