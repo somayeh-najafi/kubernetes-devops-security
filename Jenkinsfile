@@ -26,8 +26,8 @@ pipeline {
         stage ('SonarQube - SAST') {
           
           steps {
-            withSonarQubeEnv('sonarqube') {
-             sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=numeric_app -Dsonar.host.url=http://35.188.59.120:9000 -Dsonar.login=21d5b1daf75940754f34f9f0081c4bda177e001b'
+            withSonarQubeEnv('SonarQube') {
+             sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=numeric_app -Dsonar.host.url=http://35.188.59.120:9000 -Dsonar.login=fa8a8a2298a52971c1f4010811933c03201eed74'
             }
             timeout(time: 2, unit: 'MINUTES') {
                     script {
