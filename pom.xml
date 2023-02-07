@@ -82,20 +82,22 @@
                          </goals>
                       </execution>
                    </executions>
-                </plugin>
-				<plugin>
+            </plugin>
+			<plugin>
 				<!-- https://mvnrepository.com/artifact/org.owasp/dependency-check-maven -->
+				<dependencies>	
 					<dependency>
 						<groupId>org.owasp</groupId>
 						<artifactId>dependency-check-maven</artifactId>
 						<version>6.1.6</version>
 					</dependency>
-					<configuration>
-					 <format>ALL</format>
-					 <failBuildOnCVSS>9</failBuildOnCVSS>
-						
-					</configuration>
-				</plugin>
+				</dependencies>	
+				<configuration>
+					<format>ALL</format>
+					<failBuildOnCVSS>9</failBuildOnCVSS>
+					
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
