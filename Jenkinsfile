@@ -34,9 +34,19 @@ pipeline {
         }
         stage ('Vulnerability Scan - Docker') {
             steps {
-              sh "mvn dependency-check:check"
+              parallel (
+              "dependency Scan": { 
+                sh "mvn dependency-check:check"
+              },
+              "Trivy Scan": {
+                sh "bash trivy-docker-image-scan.sh"
+              }
+              )
+              
             }
         }
+
+
         stage('build and push docker image') {
             steps {
               withDockerRegistry(credentialsId: 'dockerhub', url: '') {
