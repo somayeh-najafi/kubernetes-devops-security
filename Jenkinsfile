@@ -39,7 +39,7 @@ pipeline {
                 sh "mvn dependency-check:check"
               },
               "Trivy Scan": {
-                sh "docker run --rm -v $WORKSPACE:/root/.cache/ aquasec/trivy:0.17.2 -q image  openjdk:8-jdk-alpine"
+                sh "docker run --rm nginx curl http://127.0.0.1"
                 sh "bash trivy-docker-image-scan.sh"
               }
               )
