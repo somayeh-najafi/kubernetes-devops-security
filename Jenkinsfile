@@ -42,8 +42,8 @@ pipeline {
                      sh "bash trivy-docker-image-scan.sh"
               },
                   "OPA-Conftest-Scan": {
-                    sh "pwd"
-                    //sh "docker run --rm -v "${pwd}:/project" openpolicyagent/conftest test --policy opa-dockerfile-security.rego Dockerfile"
+                    //sh "pwd"
+                    sh "docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-dockerfile-security.rego Dockerfile"
                   }
               )
               } 
