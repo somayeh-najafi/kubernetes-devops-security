@@ -38,16 +38,14 @@ pipeline {
                   "dependency Scan": { 
                     sh "mvn dependency-check:check"
               },
-                  "Trivy Scan": {
-                    
-                  
+                  "Trivy Scan": {                  
                      sh "bash trivy-docker-image-scan.sh"
-              }
+              },
+                  "OPA-Conftest-Scan": {
+                    sh "docker run --rm -v $PWD:/project openpolicyagent/conftest test --policy opa-dockerfile-security.rego Dockerfile"
+                  }
               )
-
-              }
-              
-              
+              } 
             }
         
 
