@@ -39,10 +39,10 @@ pipeline {
                     sh "mvn dependency-check:check"
               },
                   "Trivy Scan": {
-                    withDockerRegistry(credentialsId: 'dockerhub', url: '') {
-                     sh "docker run --rm aquasec/trivy:0.17.2 -q image --exit-code 0 --severity HIGH --light openjdk:8-jdk-alpine"
+                    
+                  
                      sh "bash trivy-docker-image-scan.sh"
-              }}
+              }
               )
 
               }
