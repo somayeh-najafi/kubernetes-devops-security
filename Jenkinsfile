@@ -1,12 +1,12 @@
 pipeline {
   agent any
   environment {
-    deploymentName: "devsecops"
-    containerName:"devsecops-container"
-    serviceName:"devsecops-svc"
-    imageName: "smyhus/numeric_app:${GIT_COMMIT}"
-    applicationURL: "http://35.188.59.120:32170/"
-    applicationURI: "/increment/99"
+    deploymentName = "devsecops"
+    containerName = "devsecops-container"
+    serviceName = "devsecops-svc"
+    imageName =  "smyhus/numeric_app:${GIT_COMMIT}"
+    applicationURL =  "http://35.188.59.120:32170/"
+    applicationURI =  "/increment/99"
 
   }
   stages {
@@ -76,10 +76,19 @@ pipeline {
 
         stage('Kubernetes deployment-Dev Env') {
             steps {
-              paralle (
-                withKubeConfig(credentialsId: 'kubeconfig') {
-                  sh "bash k8s-deployment.sh"
-            }
+              parallel (
+                "Deployment": {
+                    withKubeConfig(credentialsId: 'kubeconfig') {
+                      sh "bash k8s-deployment.sh"
+                   }
+                }
+                ,
+                "Rollout Status": {
+                  withKubeConfig(credentialsId: 'kubeconfig') {
+                      sh "bash k8s-deployment-rollout-status.sh"
+                   }
+                }
+                  
               )
               
             }
