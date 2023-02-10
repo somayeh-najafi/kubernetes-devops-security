@@ -62,7 +62,7 @@ pipeline {
               withDockerRegistry(credentialsId: 'dockerhub', url: '') {
                 sh "printenv"
                 sh 'docker build -t numeric_app:""$GIT_COMMIT"" .'
-                sh 'docker push smyhus/numeric_app:""$GIT_COMMIT"" '
+                sh 'docker push smyhus/numeric_app:""$GIT_COMMIT""'
             }
             }
         } 
