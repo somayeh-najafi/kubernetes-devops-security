@@ -1,6 +1,14 @@
 pipeline {
   agent any
+  environment {
+    deploymentName: "devsecops"
+    containerName:"devsecops-container"
+    serviceName:"devsecops-svc"
+    imageName: "smyhus/numeric_app:${GIT_COMMIT}"
+    applicationURL: "http://35.188.59.120:32170/"
+    applicationURI: "/increment/99"
 
+  }
   stages {
       stage('Build Artifact') {
             steps {
@@ -50,10 +58,10 @@ pipeline {
             }
    
         stage('build and push docker image') {
-            steps {
+            steps {smyhus/
               withDockerRegistry(credentialsId: 'dockerhub', url: '') {
               sh "printenv"
-              sh 'docker build -t smyhus/numeric_app:""$GIT_COMMIT"" .'
+              sh 'docker build -t numeric_app:""$GIT_COMMIT"" .'
               sh 'docker push smyhus/numeric_app:""$GIT_COMMIT"" '
             }
             }
@@ -68,10 +76,12 @@ pipeline {
 
         stage('Kubernetes deployment-Dev Env') {
             steps {
-              withKubeConfig(credentialsId: 'kubeconfig') {
-              sh "sed -i 's,replace,smyhus/numeric_app:${GIT_COMMIT},g' k8s_deployment_service.yaml"
-              sh 'kubectl apply -f k8s_deployment_service.yaml'
+              paralle (
+                withKubeConfig(credentialsId: 'kubeconfig') {
+                  sh "bash k8s-deployment.sh"
             }
+              )
+              
             }
         }
 
