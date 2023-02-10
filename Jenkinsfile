@@ -43,7 +43,7 @@ pipeline {
               },
                   "OPA-Conftest-Scan": {
                    // sh "HERE=\$(pwd)"
-                    sh 'docker run --rm -v "\$(pwd):/project" openpolicyagent/conftest:v0.25.0 test --policy opa-dockerfile-security.rego Dockerfile'
+                    sh 'docker run --rm -v "\$(pwd):/project" openpolicyagent/conftest:v0.22.0 test --policy opa-dockerfile-security.rego Dockerfile'
                   }
               )
               } 
