@@ -9,6 +9,7 @@ suspicious_env_keys = [
     "api_key",
     "apikey",
     "token",
+    "tkn"
 ]
 
 pkg_update_commands = [
@@ -104,3 +105,21 @@ deny[msg] {
 #     input[i].Cmd == "healthcheck"
 #     msg := "no healthcheck"
 # }
+
+#Any user...
+any_user{
+    input[i].Cmd =="user"
+ }
+
+deny[msg] {
+    not any_user
+    msg ="Do not run as root, use USER instead"
+}
+
+#Do not use 'latest' tag for base imagedeny[msg] {
+deny[msg] {
+    input[i].Cmd =="from"
+    val :=split(input[i].Value[0], ":")
+    contains(lower(val[1]), "latest")
+    msg =sprintf("Line %d: do not use 'latest' tag for base images", [i])
+}
