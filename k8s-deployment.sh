@@ -11,7 +11,7 @@ else
     echo "deployment ${deploymentName} exists"
     echo "image name - ${imageName}"
     #kubectl -n default set image deployment ${deploymentName} ${containerName}=${imageName} --record=true
-    kubectl -n default apply -f k8s_deployment_service.yaml;
+    kubectl -n default apply -f k8s_deployment_service.yaml
 
 fi
 
