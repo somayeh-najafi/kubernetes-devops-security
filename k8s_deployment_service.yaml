@@ -19,10 +19,16 @@ spec:
       containers:
       - image: replace
         name: ${containerName}
+        volumeMounts:
+         - name: vol
+           mountPath: /tmp
         securityContext:
          runAsNonRoot: true
          runAsUser: 100
          readOnlyRootFilesystem: true
+      volumes:
+       - name: vol
+         emptyDir
 ---
 apiVersion: v1
 kind: Service
