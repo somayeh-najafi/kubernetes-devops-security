@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: devsecops
-  name: ${deploymentName}
+  name: "${deploymentName}"
 spec:
   replicas: 2
   selector:
@@ -18,7 +18,7 @@ spec:
       serviceAccountName: default
       containers:
       - image: replace
-        name: ${containerName}
+        name: "${containerName}"
         volumeMounts:
          - name: vol
            mountPath: /tmp
@@ -35,7 +35,7 @@ kind: Service
 metadata:
   labels:
     app: devsecops
-  name: ${serviceName}
+  name: "${serviceName}"
 spec:
   ports:
   - port: 8080
