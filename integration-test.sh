@@ -10,7 +10,7 @@ echo $applicationURI
 echo $applicatinURL:$PORT/$applicationURI
 
 if [[ ! -z $PORT ]]; then
-    response=$(curl -s ${applicatinURL}:$PORT/${applicationURI})
+    response=$(curl -s $applicatinURL:$PORT/$applicationURI)
     http_code=$(curl -s -o /dev/null -w "%{http_code}" ${applicatinURL}:$PORT/${applicationURI})
 
     if [[ $response == 100 ]];
