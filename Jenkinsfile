@@ -5,7 +5,7 @@ pipeline {
     containerName = "devsecops-container"
     serviceName = "devsecops-svc"
     imageName = "smyhus/numeric_app:${GIT_COMMIT}"
-    applicationURL = "http://35.188.59.120/"
+    applicationURL = "http://35.188.59.120"
     applicationURI = "increment/99"
 
   }
@@ -105,7 +105,6 @@ pipeline {
             script {
               try {
                 withKubeConfig(credentialsId: 'kubeconfig') {
-                      sh "echo ${applicationURL}"
                       sh "bash integration-test.sh"
                    }
               }

@@ -7,11 +7,11 @@ PORT=$(kubectl -n default get svc ${serviceName} -o json | jq .spec.ports[].node
 echo $PORT
 echo $applicationURL
 echo $applicationURI
-echo $applicatinURL:$PORT/$applicationURI
+echo $applicationURL:$PORT/$applicationURI
 
 if [[ ! -z $PORT ]]; then
-    response=$(curl -s $applicatinURL:$PORT/$applicationURI)
-    http_code=$(curl -s -o /dev/null -w "%{http_code}" ${applicatinURL}:$PORT/${applicationURI})
+    response=$(curl -s $applicationURL:$PORT/$applicationURI)
+    http_code=$(curl -s -o /dev/null -w "%{http_code}" ${applicationURL}:$PORT/${applicationURI})
 
     if [[ $response == 100 ]];
         then
