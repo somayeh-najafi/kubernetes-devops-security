@@ -105,6 +105,7 @@ pipeline {
             script {
               try {
                 withKubeConfig(credentialsId: 'kubeconfig') {
+                      sh "echo ${applicationURL}"
                       sh "bash integration-test.sh"
                    }
               }
