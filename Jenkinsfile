@@ -4,9 +4,9 @@ pipeline {
     deploymentName = "devsecops"
     containerName = "devsecops-container"
     serviceName = "devsecops-svc"
-    imageName =  "smyhus/numeric_app:${GIT_COMMIT}"
-    applicationURL =  "http://35.188.59.120:32170/"
-    applicationURI =  "increment/99"
+    imageName = "smyhus/numeric_app:${GIT_COMMIT}"
+    applicationURL = "http://35.188.59.120:32170/"
+    applicationURI = "increment/99"
 
   }
   stages {
