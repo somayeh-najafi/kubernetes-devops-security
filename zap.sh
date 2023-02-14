@@ -2,7 +2,7 @@
 
 PORT=$(kubectl -n default get svc ${serviceName} -o json | jq .spec.ports[].nodePort)
 
-docker run -t -v "\$(pwd):/zap/wrk/:rw" owasp/zap2docker-weekly zap-api-scan.py -t $applicationURL:$PORT/v3/api-docs -f openapi -r zap_report.html
+docker run -t -v $(pwd):/zap/wrk/:rw owasp/zap2docker-weekly zap-api-scan.py -t $applicationURL:$PORT/v3/api-docs -f openapi -r zap_report.html
 exit_code=$?
 
 sudo mkdir -p owasp-zap-report
