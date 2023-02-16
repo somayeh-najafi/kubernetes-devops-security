@@ -126,12 +126,19 @@ pipeline {
     //                }
     //       }
     //     }
-
-            stage('slack test') {
+            stage('Deploy to Prod?') {
               steps {
-                sh "exit 1"
+                timeout(time: 2,unit: 'DAYS') {
+                  input ("Do you want to deploy to production?")
+                }
               }
             }
+
+            // stage('slack test') {
+            //   steps {
+            //     sh "exit 1"
+            //   }
+            // }
               
     }
 
