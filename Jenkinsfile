@@ -84,7 +84,6 @@ pipeline {
     //                     }
     //                       }
 
-
     //     stage('Kubernetes deployment-Dev Env') {
     //         steps {
     //           parallel (
