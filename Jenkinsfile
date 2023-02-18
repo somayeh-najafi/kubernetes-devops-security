@@ -139,9 +139,9 @@ pipeline {
           steps {
             script {
                parallel (
-                  // "Master": {
-                  //     sh "bash cis-master.sh"
-                  // },
+                  "Master": {
+                      sh "bash cis-master.sh"
+                  },
                   "Etcd": {
                       sh "bash cis-etcd.sh"
                   },
