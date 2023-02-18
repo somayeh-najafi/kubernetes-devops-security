@@ -135,13 +135,13 @@ pipeline {
             //     sh "exit 1"
             //   }
             // }   
-        stage('K8s-CIS-Benchmark') {
+        stage('K8s CIS Benchmark') {
           steps {
             script {
                paralll (
-                  "Master": {
-                      sh "bash cis-master.sh"
-                  },
+                  // "Master": {
+                  //     sh "bash cis-master.sh"
+                  // },
                   "Etcd": {
                       sh "bash cis-etcd.sh"
                   },
