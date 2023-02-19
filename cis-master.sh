@@ -1,5 +1,5 @@
 #! /bin/bash
-
+#cis-master.sh
 total_fail=$(kube-bench run --targets master --version 1.15 --check 1.2.21,1.2.23,1.2.24 --json | jq .total_fail)
 
 if [[ "$total_fail" -ne 0 ]];

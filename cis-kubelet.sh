@@ -1,5 +1,5 @@
 #! /bin/bash
-
+#cis-node.sh
 total_fail=$(kube-bench run --targets node --version 1.15 --check 4.2.1,4.2.2 --json | jq .total_fail)
 
 if [[ "$total_fail" -ne 0 ]];
