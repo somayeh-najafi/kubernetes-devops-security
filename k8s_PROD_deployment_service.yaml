@@ -26,7 +26,7 @@ spec:
          capabilities:
           drop: 
           - NET_RAW
-         allowPrivilegeScalation: false
+         allowPrivilegeEscalation: false
          runAsNonRoot: true
          runAsUser: 100
          readOnlyRootFilesystem: true
