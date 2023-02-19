@@ -11,12 +11,12 @@ pipeline {
 
   }
   stages {
-    //   stage('Build Artifact') {
-    //         steps {
-    //           sh "mvn clean package -DskipTests=true"
-    //           archive 'target/*.jar' //so that they can be downloaded later//
-    //         }
-    //     } 
+      stage('Build Artifact') {
+            steps {
+              sh "mvn clean package -DskipTests=true"
+              archive 'target/*.jar' //so that they can be downloaded later//
+            }
+        } 
     //    stage('Unit Tests - JUnit and Jacoco') {
     //   steps {
     //     sh "mvn test"}
@@ -56,15 +56,15 @@ pipeline {
     //           } 
     //         }
    
-    //     stage('build and push docker image') {
-    //         steps {
-    //           withDockerRegistry(credentialsId: 'dockerhub', url: '') {
-    //             sh "printenv"
-    //             sh 'docker build -t smyhus/numeric_app:""$GIT_COMMIT"" .'
-    //             sh 'docker push smyhus/numeric_app:""$GIT_COMMIT""'
-    //         }
-    //         }
-    //     } 
+        stage('build and push docker image') {
+            steps {
+              withDockerRegistry(credentialsId: 'dockerhub', url: '') {
+                sh "printenv"
+                sh 'docker build -t smyhus/numeric_app:""$GIT_COMMIT"" .'
+                sh 'docker push smyhus/numeric_app:""$GIT_COMMIT""'
+            }
+            }
+        } 
 
     //     stage ('Vulnerability Scan - Kubernetes') {
     //         steps {
@@ -82,22 +82,22 @@ pipeline {
     //                     }
     //                       }
 
-    //     stage('Kubernetes deployment-Dev Env') {
-    //         steps {
-    //           parallel (
-    //             "Deployment": {
-    //                 withKubeConfig(credentialsId: 'kubeconfig') {
-    //                   sh "bash k8s-deployment.sh"
-    //                }
-    //             },
-    //             "Rollout Status": {
-    //               withKubeConfig(credentialsId: 'kubeconfig') {
-    //                   sh "bash k8s-deployment-rollout-status.sh"
-    //                }
-    //             }
-    //           )
-    //         }
-    //     }
+        stage('Kubernetes deployment-Dev Env') {
+            steps {
+              parallel (
+                "Deployment": {
+                    withKubeConfig(credentialsId: 'kubeconfig') {
+                      sh "bash k8s-deployment.sh"
+                   }
+                },
+                "Rollout Status": {
+                  withKubeConfig(credentialsId: 'kubeconfig') {
+                      sh "bash k8s-deployment-rollout-status.sh"
+                   }
+                }
+              )
+            }
+        }
     //     stage('Integration Test'){
     //       steps {
     //         script {
