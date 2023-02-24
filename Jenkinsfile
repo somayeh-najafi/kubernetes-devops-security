@@ -98,7 +98,7 @@ pipeline {
               )
             }
         }
-    //     stage('Integration Test'){
+    //     stage('Integration Test - DEV'){
     //       steps {
     //         script {
     //           try {
@@ -169,7 +169,26 @@ pipeline {
               }
             )
           }
-        }     
+        }  
+        stage('Integration Test - PROD'){
+          steps {
+            script {
+              try {
+                withKubeConfig(credentialsId: 'kubeconfig') {
+                      sh "bash integration-test-prod.sh"
+                   }
+              }
+              catch (e) {
+                 withKubeConfig(credentialsId: 'kubeconfig') {
+                      sh "kubectl -n prod rollout undo deployment ${deploymentName} "
+                   }
+                 throw e 
+                }
+              }
+            }
+          }
+
+
     }
 
 
